@@ -10,7 +10,7 @@ import {
 import { MdEmail, MdPhone } from "react-icons/md";
 import { FiCode, FiLayout } from "react-icons/fi";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { translations } from "@/translations";
 
 export default function Home() {
@@ -18,6 +18,7 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState<"en" | "tr">("en");
+  const languageRef = useRef<HTMLDivElement>(null);
 
   const t = translations[currentLanguage];
 
@@ -25,6 +26,23 @@ export default function Home() {
     setCurrentLanguage(lang);
     setIsLanguageOpen(false);
   };
+
+  // Add click outside handler
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        languageRef.current &&
+        !languageRef.current.contains(event.target as Node)
+      ) {
+        setIsLanguageOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="flex min-h-screen overflow-x-hidden">
@@ -59,7 +77,7 @@ export default function Home() {
         </div>
 
         {/* Language Selector */}
-        <div className="relative">
+        <div className="relative" ref={languageRef}>
           <button
             onClick={() => setIsLanguageOpen(!isLanguageOpen)}
             className="flex items-center space-x-1 text-sm text-gray-600 hover:text-gray-900 p-2 rounded-lg hover:bg-gray-100"
@@ -112,7 +130,7 @@ export default function Home() {
 
       {/* Sidebar - Hidden on mobile unless menu is open */}
       <aside
-        className={`w-64 fixed top-0 left-0 h-screen bg-white border-r border-gray-300 p-8 flex flex-col transform 
+        className={`w-64 fixed top-0 left-0 h-screen bg-white border-r border-gray-300 p-6 flex flex-col transform 
         lg:translate-x-0 transition-transform duration-300 z-40
         ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
         ${
@@ -120,7 +138,7 @@ export default function Home() {
         } lg:top-0 lg:h-screen overflow-y-auto`}
       >
         {/* Add language selector for mobile menu */}
-        <div className="lg:hidden mb-4 border-b border-gray-200 pb-4">
+        <div className="lg:hidden mb-3 border-b border-gray-200 pb-3">
           <div className="flex items-center justify-between">
             <span className="text-sm text-gray-600">{t.language}</span>
             <div className="flex space-x-2">
@@ -149,21 +167,23 @@ export default function Home() {
         </div>
 
         {/* Mobile Profile Section */}
-        <div className="lg:hidden mb-6 text-center">
-          <div className="w-24 h-24 mx-auto rounded-full overflow-hidden mb-3">
+        <div className="lg:hidden mb-4 text-center">
+          <div className="w-20 h-20 mx-auto rounded-full overflow-hidden mb-3">
             <Image
               src="/img/profil.png"
               alt="Deniz Barçak"
-              width={96}
-              height={96}
+              width={80}
+              height={80}
               className="object-cover"
               unoptimized
             />
           </div>
-          <h2 className="text-lg font-medium text-gray-900">Deniz Barçak</h2>
-          <p className="text-sm text-gray-600 flex flex-col items-center">
+          <h2 className="text-base font-medium text-gray-900 mb-1">
+            Deniz Barçak
+          </h2>
+          <p className="text-sm text-gray-600 flex flex-col">
             <span>{t.hero.role.split(" & ")[0]}</span>
-            <span>&</span>
+            <span className="my-0.5">&</span>
             <span>{t.hero.role.split(" & ")[1]}</span>
           </p>
         </div>
@@ -190,38 +210,38 @@ export default function Home() {
         </div>
 
         {/* Navigation */}
-        <nav className="mt-8 border-t border-b border-gray-200 py-6">
+        <nav className="mt-5 border-t border-b border-gray-200 py-4">
           <ul className="space-y-2">
             <li>
               <Link
                 href="#about"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-gray-600 hover:text-gray-900 transition-colors block py-2 text-center"
+                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm"
               >
                 {t.navigation.about}
               </Link>
             </li>
-            <div className="w-16 h-px bg-gray-200 mx-auto my-2"></div>
+            <div className="w-14 h-px bg-gray-200 mx-auto my-1"></div>
             <li>
               <Link
                 href="#what-i-do"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-gray-600 hover:text-gray-900 transition-colors block py-2 text-center"
+                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm"
               >
                 {t.whatIDo.title}
               </Link>
             </li>
-            <div className="w-16 h-px bg-gray-200 mx-auto my-2"></div>
+            <div className="w-14 h-px bg-gray-200 mx-auto my-1"></div>
             <li>
               <Link
                 href="#resume"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-gray-600 hover:text-gray-900 transition-colors block py-2 text-center"
+                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm"
               >
                 {t.navigation.resume}
               </Link>
             </li>
-            <div className="w-16 h-px bg-gray-200 mx-auto my-2"></div>
+            <div className="w-14 h-px bg-gray-200 mx-auto my-1"></div>
             <li>
               <Link
                 href="#portfolio"
@@ -229,17 +249,17 @@ export default function Home() {
                   setIsPortfolioOpen(true);
                   setIsMobileMenuOpen(false);
                 }}
-                className="text-gray-600 hover:text-gray-900 transition-colors block py-2 text-center"
+                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm"
               >
                 {t.portfolio.title}
               </Link>
             </li>
-            <div className="w-16 h-px bg-gray-200 mx-auto my-2"></div>
+            <div className="w-14 h-px bg-gray-200 mx-auto my-1"></div>
             <li>
               <Link
                 href="#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-gray-600 hover:text-gray-900 transition-colors block py-2 text-center"
+                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm"
               >
                 {t.contact.title}
               </Link>
@@ -310,31 +330,31 @@ export default function Home() {
         </div>
 
         {/* Social Links - Mobile */}
-        <div className="lg:hidden mt-6 pb-6">
-          <div className="flex justify-center space-x-4">
+        <div className="lg:hidden mt-4 pb-4">
+          <div className="flex justify-center space-x-5">
             <Link
               href="mailto:denizbarcak@gmail.com"
               className="text-gray-600 hover:text-gray-900"
             >
-              <MdEmail className="w-6 h-6" />
+              <MdEmail className="w-5 h-5" />
             </Link>
             <Link
               href="tel:+90 539 483 23 22"
               className="text-gray-600 hover:text-gray-900"
             >
-              <MdPhone className="w-6 h-6" />
+              <MdPhone className="w-5 h-5" />
             </Link>
             <Link
               href="https://wa.me/905394832322"
               className="text-gray-600 hover:text-gray-900"
             >
-              <FaWhatsapp className="w-6 h-6" />
+              <FaWhatsapp className="w-5 h-5" />
             </Link>
             <Link
               href="https://github.com/denizbarcak"
               className="text-gray-600 hover:text-gray-900"
             >
-              <FaGithub className="w-6 h-6" />
+              <FaGithub className="w-5 h-5" />
             </Link>
           </div>
         </div>
