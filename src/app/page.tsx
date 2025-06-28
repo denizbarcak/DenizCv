@@ -249,6 +249,32 @@ export default function Home() {
 
         {/* Social Links - Desktop */}
         <div className="mt-auto hidden lg:block">
+          {/* Language Selector for Desktop */}
+          <div className="mb-6">
+            <div className="flex items-center justify-center">
+              <button
+                onClick={() => handleLanguageChange("en")}
+                className={`px-3 py-1.5 text-sm rounded-md mr-2 ${
+                  currentLanguage === "en"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+              >
+                English
+              </button>
+              <button
+                onClick={() => handleLanguageChange("tr")}
+                className={`px-3 py-1.5 text-sm rounded-md ${
+                  currentLanguage === "tr"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+              >
+                Türkçe
+              </button>
+            </div>
+          </div>
+
           <div className="flex justify-center space-x-4">
             <Link
               href="mailto:denizbarcak@gmail.com"
