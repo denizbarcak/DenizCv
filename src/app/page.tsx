@@ -2,16 +2,13 @@
 import Image from "next/image";
 import {
   FaGithub,
-  FaInstagram,
   FaWhatsapp,
-  FaTwitter,
-  FaFacebookF,
   FaChevronDown,
   FaCube,
   FaServer,
 } from "react-icons/fa";
 import { MdEmail, MdPhone } from "react-icons/md";
-import { FiMonitor, FiSmartphone, FiCode, FiLayout } from "react-icons/fi";
+import { FiCode, FiLayout } from "react-icons/fi";
 import Link from "next/link";
 import { useState } from "react";
 import { translations } from "@/translations";
