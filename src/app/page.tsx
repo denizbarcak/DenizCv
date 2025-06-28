@@ -115,7 +115,9 @@ export default function Home() {
         className={`w-64 fixed top-0 left-0 h-screen bg-white border-r border-gray-300 p-8 flex flex-col transform 
         lg:translate-x-0 transition-transform duration-300 z-40
         ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
-        ${isMobileMenuOpen ? "top-16" : "top-0"} lg:top-0`}
+        ${
+          isMobileMenuOpen ? "top-16 h-[calc(100vh-4rem)]" : "top-0 h-screen"
+        } lg:top-0 lg:h-screen overflow-y-auto`}
       >
         {/* Add language selector for mobile menu */}
         <div className="lg:hidden mb-4 border-b border-gray-200 pb-4">
@@ -159,7 +161,11 @@ export default function Home() {
             />
           </div>
           <h2 className="text-lg font-medium text-gray-900">Deniz Barçak</h2>
-          <p className="text-sm text-gray-600">{t.hero.role}</p>
+          <p className="text-sm text-gray-600 flex flex-col items-center">
+            <span>{t.hero.role.split(" & ")[0]}</span>
+            <span>&</span>
+            <span>{t.hero.role.split(" & ")[1]}</span>
+          </p>
         </div>
 
         <div className="text-center lg:block hidden">
@@ -176,11 +182,15 @@ export default function Home() {
           <h1 className="text-2xl font-semibold text-gray-800 tracking-tight">
             Deniz Barçak
           </h1>
-          <p className="text-gray-600 mt-1">{t.hero.role}</p>
+          <p className="text-gray-600 mt-1 flex flex-col">
+            <span>{t.hero.role.split(" & ")[0]}</span>
+            <span>&</span>
+            <span>{t.hero.role.split(" & ")[1]}</span>
+          </p>
         </div>
 
         {/* Navigation */}
-        <nav className="mt-8">
+        <nav className="mt-8 border-t border-b border-gray-200 py-6">
           <ul className="space-y-2">
             <li>
               <Link
@@ -191,6 +201,7 @@ export default function Home() {
                 {t.navigation.about}
               </Link>
             </li>
+            <div className="w-16 h-px bg-gray-200 mx-auto my-2"></div>
             <li>
               <Link
                 href="#what-i-do"
@@ -200,6 +211,7 @@ export default function Home() {
                 {t.whatIDo.title}
               </Link>
             </li>
+            <div className="w-16 h-px bg-gray-200 mx-auto my-2"></div>
             <li>
               <Link
                 href="#resume"
@@ -209,6 +221,7 @@ export default function Home() {
                 {t.navigation.resume}
               </Link>
             </li>
+            <div className="w-16 h-px bg-gray-200 mx-auto my-2"></div>
             <li>
               <Link
                 href="#portfolio"
@@ -221,6 +234,7 @@ export default function Home() {
                 {t.portfolio.title}
               </Link>
             </li>
+            <div className="w-16 h-px bg-gray-200 mx-auto my-2"></div>
             <li>
               <Link
                 href="#contact"
@@ -233,60 +247,69 @@ export default function Home() {
           </ul>
         </nav>
 
-        {/* Social Links */}
-        <div className="mt-auto">
-          {/* Language Selector for Desktop */}
-          <div className="hidden lg:block mb-6">
-            <div className="flex items-center justify-center">
-              <button
-                onClick={() => handleLanguageChange("en")}
-                className={`px-3 py-1.5 text-sm rounded-md mr-2 ${
-                  currentLanguage === "en"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                English
-              </button>
-              <button
-                onClick={() => handleLanguageChange("tr")}
-                className={`px-3 py-1.5 text-sm rounded-md ${
-                  currentLanguage === "tr"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                Türkçe
-              </button>
-            </div>
-          </div>
-
+        {/* Social Links - Desktop */}
+        <div className="mt-auto hidden lg:block">
           <div className="flex justify-center space-x-4">
-            <a
+            <Link
               href="mailto:denizbarcak@gmail.com"
               className="text-gray-400 hover:text-gray-600"
               title="Send email"
             >
               <MdEmail className="w-5 h-5" />
-            </a>
-            <a
-              href="https://wa.me/905555555555"
-              target="_blank"
-              rel="noopener noreferrer"
+            </Link>
+            <Link
+              href="tel:+90 539 483 23 22"
               className="text-gray-400 hover:text-gray-600"
-              title="Contact on WhatsApp"
+              title="Call me"
+            >
+              <MdPhone className="w-5 h-5" />
+            </Link>
+            <Link
+              href="https://wa.me/905394832322"
+              target="_blank"
+              className="text-gray-400 hover:text-gray-600"
+              title="WhatsApp"
             >
               <FaWhatsapp className="w-5 h-5" />
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://github.com/denizbarcak"
               target="_blank"
-              rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-600"
-              title="View GitHub profile"
+              title="GitHub"
             >
               <FaGithub className="w-5 h-5" />
-            </a>
+            </Link>
+          </div>
+        </div>
+
+        {/* Social Links - Mobile */}
+        <div className="lg:hidden mt-6 pb-6">
+          <div className="flex justify-center space-x-4">
+            <Link
+              href="mailto:denizbarcak@gmail.com"
+              className="text-gray-600 hover:text-gray-900"
+            >
+              <MdEmail className="w-6 h-6" />
+            </Link>
+            <Link
+              href="tel:+90 539 483 23 22"
+              className="text-gray-600 hover:text-gray-900"
+            >
+              <MdPhone className="w-6 h-6" />
+            </Link>
+            <Link
+              href="https://wa.me/905394832322"
+              className="text-gray-600 hover:text-gray-900"
+            >
+              <FaWhatsapp className="w-6 h-6" />
+            </Link>
+            <Link
+              href="https://github.com/denizbarcak"
+              className="text-gray-600 hover:text-gray-900"
+            >
+              <FaGithub className="w-6 h-6" />
+            </Link>
           </div>
         </div>
       </aside>

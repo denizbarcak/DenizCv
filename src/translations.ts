@@ -68,7 +68,7 @@ export const translations: { [key: string]: Translation } = {
       designSkills: "Design & Technical Skills",
     },
     hero: {
-      role: "Frontend Developer",
+      role: "Full Stack Developer & Interior Designer",
       title: "Hi, I'm Deniz Barçak.",
       description:
         "I graduated from the Interior Architecture Department of Haliç University in 2022. I have a strong foundation in design, technical drawing, and 3D modeling, and I've actively contributed to projects of various scales. Driven by the desire to express my creativity beyond physical spaces, I turned to software development. I began an intensive full-stack program at Üçüncü Binyıl Academy, focusing on both frontend and backend technologies. During this time, I also worked at Kartelam, where I applied my knowledge in real-world projects. I enjoy blending design thinking with code—merging aesthetics and functionality to create meaningful digital experiences.",
@@ -129,7 +129,7 @@ export const translations: { [key: string]: Translation } = {
       designSkills: "Tasarım & Teknik Beceriler",
     },
     hero: {
-      role: "Frontend Geliştirici",
+      role: "Full Stack Geliştirici & İç Mimar",
       title: "Merhaba, Ben Deniz Barçak.",
       description:
         "2022 yılında Haliç Üniversitesi İç Mimarlık Bölümü'nden mezun oldum. Tasarım, teknik çizim ve 3D modelleme konularında güçlü bir altyapıya sahibim ve çeşitli ölçeklerde projelere aktif olarak katkıda bulundum. Yaratıcılığımı fiziksel mekanların ötesinde ifade etme arzusuyla yazılım geliştirmeye yöneldim. Üçüncü Binyıl Akademi'de yoğun bir full-stack programına başladım ve hem frontend hem de backend teknolojilerine odaklandım. Bu süre zarfında Kartelam'da çalışarak bilgilerimi gerçek dünya projelerinde uyguladım. Tasarım düşüncesini kodla harmanlayarak, estetik ve işlevselliği birleştirerek anlamlı dijital deneyimler yaratmaktan keyif alıyorum.",
