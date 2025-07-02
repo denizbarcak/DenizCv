@@ -48,91 +48,91 @@ export default function Home() {
     <div className="flex min-h-screen overflow-x-hidden">
       {/* Mobile Header */}
       <div className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 lg:hidden z-50">
-        <div className="flex items-center space-x-3">
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 hover:bg-gray-100 rounded-lg"
-          >
-            <svg
-              className="w-7 h-7"
-              fill="none"
-              stroke="#1d4ed8"
-              strokeWidth={2.5}
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d={
-                  isMobileMenuOpen
-                    ? "M6 18L18 6M6 6l12 12"
-                    : "M4 6h16M4 12h16M4 18h16"
-                }
-              />
-            </svg>
-          </button>
+        <div className="flex items-center">
           <span className="font-semibold text-gray-900 text-base">
             Deniz Barçak
           </span>
         </div>
 
-        {/* Language Selector */}
-        <div className="relative" ref={languageRef}>
-          <button
-            onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-            className="flex items-center space-x-1 text-sm text-gray-600 hover:text-gray-900 p-2 rounded-lg hover:bg-gray-100"
-          >
-            <span>{currentLanguage.toUpperCase()}</span>
-            <svg
-              className={`w-4 h-4 transition-transform duration-200 ${
-                isLanguageOpen ? "rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+        <div className="flex items-center space-x-2">
+          {/* Language Selector */}
+          <div className="relative" ref={languageRef}>
+            <button
+              onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+              className="flex items-center space-x-1 text-sm text-gray-600 hover:text-gray-900 p-2 rounded-lg hover:bg-gray-100"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
+              <span>{currentLanguage.toUpperCase()}</span>
+              <svg
+                className={`w-4 h-4 transition-transform duration-200 ${
+                  isLanguageOpen ? "rotate-180" : ""
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
 
-          {/* Language Dropdown */}
-          {isLanguageOpen && (
-            <div className="absolute right-0 mt-2 w-24 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
-              <button
-                onClick={() => handleLanguageChange("en")}
-                className={`w-full text-left px-4 py-2 text-sm ${
-                  currentLanguage === "en"
-                    ? "text-blue-600 bg-blue-50"
-                    : "text-gray-700 hover:bg-gray-100"
-                }`}
-              >
-                English
-              </button>
-              <button
-                onClick={() => handleLanguageChange("tr")}
-                className={`w-full text-left px-4 py-2 text-sm ${
-                  currentLanguage === "tr"
-                    ? "text-blue-600 bg-blue-50"
-                    : "text-gray-700 hover:bg-gray-100"
-                }`}
-              >
-                Türkçe
-              </button>
+            {/* Language Dropdown */}
+            {isLanguageOpen && (
+              <div className="absolute right-0 mt-2 w-24 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
+                <button
+                  onClick={() => handleLanguageChange("en")}
+                  className={`w-full text-left px-4 py-2 text-sm ${
+                    currentLanguage === "en"
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  English
+                </button>
+                <button
+                  onClick={() => handleLanguageChange("tr")}
+                  className={`w-full text-left px-4 py-2 text-sm ${
+                    currentLanguage === "tr"
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  Türkçe
+                </button>
+              </div>
+            )}
+          </div>
+
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 hover:bg-gray-100 rounded-lg relative w-10 h-10 flex items-center justify-center"
+          >
+            <div className="w-6 flex flex-col items-center justify-center">
+              <span
+                className={`bg-blue-600 h-0.5 w-6 rounded-sm transition-all duration-300 ease-out
+                ${isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""}`}
+              />
+              <span
+                className={`bg-blue-600 h-0.5 w-6 rounded-sm my-1 transition-all duration-300 ease-out
+                ${isMobileMenuOpen ? "opacity-0" : ""}`}
+              />
+              <span
+                className={`bg-blue-600 h-0.5 w-6 rounded-sm transition-all duration-300 ease-out
+                ${isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""}`}
+              />
             </div>
-          )}
+          </button>
         </div>
       </div>
 
       {/* Sidebar - Hidden on mobile unless menu is open */}
       <aside
-        className={`w-64 fixed top-0 left-0 h-screen bg-white border-r border-gray-300 p-6 flex flex-col transform 
-        lg:translate-x-0 transition-transform duration-300 z-40
-        ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
+        className={`w-64 fixed top-0 right-0 h-screen bg-white border-l border-gray-300 p-6 flex flex-col transform 
+        lg:translate-x-0 lg:left-0 lg:border-r lg:border-l-0 transition-transform duration-300 z-40
+        ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}
         ${
           isMobileMenuOpen ? "top-16 h-[calc(100vh-4rem)]" : "top-0 h-screen"
         } lg:top-0 lg:h-screen overflow-y-auto`}
@@ -150,7 +150,7 @@ export default function Home() {
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
-                EN
+                English
               </button>
               <button
                 onClick={() => handleLanguageChange("tr")}
@@ -160,7 +160,7 @@ export default function Home() {
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
-                TR
+                Türkçe
               </button>
             </div>
           </div>
@@ -216,32 +216,29 @@ export default function Home() {
               <Link
                 href="#about"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm"
+                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-12 after:h-[1px] after:bg-gray-400 after:opacity-0 hover:after:opacity-40 after:transition-all"
               >
                 {t.navigation.about}
               </Link>
             </li>
-            <div className="w-14 h-px bg-gray-200 mx-auto my-1"></div>
             <li>
               <Link
                 href="#what-i-do"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm"
+                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-12 after:h-[1px] after:bg-gray-400 after:opacity-0 hover:after:opacity-40 after:transition-all"
               >
                 {t.whatIDo.title}
               </Link>
             </li>
-            <div className="w-14 h-px bg-gray-200 mx-auto my-1"></div>
             <li>
               <Link
                 href="#resume"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm"
+                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-12 after:h-[1px] after:bg-gray-400 after:opacity-0 hover:after:opacity-40 after:transition-all"
               >
                 {t.navigation.resume}
               </Link>
             </li>
-            <div className="w-14 h-px bg-gray-200 mx-auto my-1"></div>
             <li>
               <Link
                 href="#portfolio"
@@ -249,17 +246,16 @@ export default function Home() {
                   setIsPortfolioOpen(true);
                   setIsMobileMenuOpen(false);
                 }}
-                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm"
+                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-12 after:h-[1px] after:bg-gray-400 after:opacity-0 hover:after:opacity-40 after:transition-all"
               >
                 {t.portfolio.title}
               </Link>
             </li>
-            <div className="w-14 h-px bg-gray-200 mx-auto my-1"></div>
             <li>
               <Link
                 href="#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm"
+                className="text-gray-600 hover:text-gray-900 transition-colors block py-1.5 text-center text-sm relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-12 after:h-[1px] after:bg-gray-400 after:opacity-0 hover:after:opacity-40 after:transition-all"
               >
                 {t.contact.title}
               </Link>
@@ -335,24 +331,32 @@ export default function Home() {
             <Link
               href="mailto:denizbarcak@gmail.com"
               className="text-gray-600 hover:text-gray-900"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <MdEmail className="w-5 h-5" />
             </Link>
             <Link
               href="tel:+90 539 483 23 22"
               className="text-gray-600 hover:text-gray-900"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <MdPhone className="w-5 h-5" />
             </Link>
             <Link
               href="https://wa.me/905394832322"
               className="text-gray-600 hover:text-gray-900"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <FaWhatsapp className="w-5 h-5" />
             </Link>
             <Link
               href="https://github.com/denizbarcak"
               className="text-gray-600 hover:text-gray-900"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <FaGithub className="w-5 h-5" />
             </Link>
